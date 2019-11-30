@@ -143,12 +143,18 @@ public class Board : MonoBehaviour
             {
                 if(tiles[i,j] != null && tiles[i,j].isMatched)
                 {
-                    Destroy(tiles[i, j].gameObject);
-                    tiles[i, j] = null;
-                    isBoardFilled = false;
+                    StartCoroutine(Collapse(i, j));
                 }
             }
         }
+    }
+    IEnumerator Collapse(int i, int j)
+    {
+        tiles[i, j].GetComponent<SpriteRenderer>().color = Color.gray;
+        yield return new WaitForSeconds(0.50f);
+        Destroy(tiles[i, j].gameObject);
+        tiles[i, j] = null;
+        isBoardFilled = false;
     }
 
     private void RefillBoard()
@@ -157,21 +163,20 @@ public class Board : MonoBehaviour
         {
             for (int i = 0; i < mWidth; i++)
             {
-                if (tiles[i, mHeight - 1] == null)
-                    tiles[i, mHeight - 1] = InstantiateTile(i, mHeight - 1);
-            }
-
-            for (int i = 0; i < mWidth; i++)
-            {
                 for (int j = 0; j < mHeight; j++)
                 {
-                    if(tiles[i, j] == null)
+                    if (tiles[i, mHeight - 1] == null)
+                        tiles[i, mHeight - 1] = InstantiateTile(i, mHeight - 1);
+
+                    if (tiles[i, j] == null)
                     {
                         if (j != (mHeight-1) && tiles[i, j+1] != null)
                         {
                             tiles[i, j] = tiles[i, j+1];
                             tiles[i, j+1] = null;
                             tiles[i, j].transform.position = new Vector2(i, j);
+                            //StartCoroutine(DropTile(i, j));
+                            //StartCoroutine(TransformTile(i, j));
                         }
                     }
                 }
@@ -181,6 +186,31 @@ public class Board : MonoBehaviour
         isBoardFilled = true;
         MatchDetection();
     }
+    IEnumerator DropTile(int i, int j)
+    {
+        Vector2 currentPos = tiles[i, j].transform.position;
+        Vector2 targetPos = new Vector2(i, j);
+        tiles[i, j].transform.position = Vector2.Lerp(currentPos, targetPos, (Vector2.Distance(targetPos, currentPos) / 50) * Time.deltaTime);
+        yield return null;
+    }
+
+    IEnumerator TransformTile(int i, int j)
+    {
+        Vector2 currentPos = tiles[i, j].transform.position;
+        Vector2 targetPos = new Vector2(i, j);
+        while((tiles[i,j].transform.position.y - j) > 0.01f)
+        {
+            yield return new WaitForSeconds(0.3f);
+            tiles[i, j].transform.position = Vector2.Lerp(currentPos, targetPos, (Vector2.Distance(targetPos, currentPos)/10) * Time.deltaTime);
+            Debug.Log(tiles[i, j].transform.position.y);
+            //if ((tiles[i, j].transform.position.y - j) <= 0.01f)
+            //{
+            //    tiles[i, j].transform.position = new Vector2(i, j);
+            //    //StopCoroutine(TransformTile(i, j));
+            //}
+        }
+    }
+
 
     bool IsBoardFilled()
     {
