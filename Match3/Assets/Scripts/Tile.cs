@@ -15,4 +15,5 @@ public abstract class Tile : MonoBehaviour
 {
     protected TileType tileType;
     public bool isMatched;
+    public TileType GetTileType() { return tileType; }
 }

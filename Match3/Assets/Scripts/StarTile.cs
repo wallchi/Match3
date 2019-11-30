@@ -4,7 +4,7 @@ using UnityEngine;
 
 public sealed class StarTile : Tile
 {
-    void Start()
+    void Awake()
     {
         tileType = TileType.star;
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public sealed class SquareTile : Tile
 {
-    void Start()
+    void Awake()
     {
         tileType = TileType.square;
     }

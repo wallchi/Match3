@@ -4,7 +4,7 @@ using UnityEngine;
 
 public sealed class DiamondTile : Tile
 {
-    void Start()
+    void Awake()
     {
         tileType = TileType.diamond;
     }

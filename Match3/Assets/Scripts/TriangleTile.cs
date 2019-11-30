@@ -4,7 +4,7 @@ using UnityEngine;
 
 public sealed class TriangleTile : Tile
 {
-    void Start()
+    void Awake()
     {
         tileType = TileType.triangle;
     }

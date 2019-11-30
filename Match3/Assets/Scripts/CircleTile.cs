@@ -4,7 +4,7 @@ using UnityEngine;
 
 public sealed class CircleTile : Tile
 {
-    void Start()
+    void Awake()
     {
         tileType = TileType.circle;
     }
