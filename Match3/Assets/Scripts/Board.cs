@@ -17,6 +17,10 @@ public class Board : MonoBehaviour
 
     bool isBoardFilled;
 
+    int score;
+
+    public int GetScore() { return score; }
+
     void Start()
     {
         tiles = new Tile[mWidth, mHeight];
@@ -144,6 +148,7 @@ public class Board : MonoBehaviour
                 if(tiles[i,j] != null && tiles[i,j].isMatched)
                 {
                     StartCoroutine(Collapse(i, j));
+                    score += 100;
                 }
             }
         }
@@ -175,7 +180,6 @@ public class Board : MonoBehaviour
                             tiles[i, j] = tiles[i, j+1];
                             tiles[i, j+1] = null;
                             tiles[i, j].transform.position = new Vector2(i, j);
-                            //StartCoroutine(DropTile(i, j));
                             //StartCoroutine(TransformTile(i, j));
                         }
                     }
@@ -186,14 +190,8 @@ public class Board : MonoBehaviour
         isBoardFilled = true;
         MatchDetection();
     }
-    IEnumerator DropTile(int i, int j)
-    {
-        Vector2 currentPos = tiles[i, j].transform.position;
-        Vector2 targetPos = new Vector2(i, j);
-        tiles[i, j].transform.position = Vector2.Lerp(currentPos, targetPos, (Vector2.Distance(targetPos, currentPos) / 50) * Time.deltaTime);
-        yield return null;
-    }
 
+    // doesnt work
     IEnumerator TransformTile(int i, int j)
     {
         Vector2 currentPos = tiles[i, j].transform.position;

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7783849255138401830}
   - component: {fileID: 7783849255138401829}
+  - component: {fileID: 661173738}
   m_Layer: 0
   m_Name: Board
   m_TagString: Untagged
@@ -43,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f1ea48f2c1810944b4b99f209732397, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  columns: 0
-  rows: 0
+  mWidth: 5
+  mHeight: 9
   circlePrefab: {fileID: 6151966742256438454, guid: 2b96285a3d342f2438b5f86476925a57,
     type: 3}
   diamondPrefab: {fileID: 4887412586131219849, guid: 8c98952f886727e4a9da44503a3945a2,
@@ -55,3 +56,17 @@ MonoBehaviour:
     type: 3}
   trianglePrefab: {fileID: 6406401403503393225, guid: aaf59afe8dbdc4c4baab691354e32c60,
     type: 3}
+--- !u!114 &661173738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7783849255138401828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 272823376e812e24380745d747abca4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selected1: {fileID: 0}
+  selected2: {fileID: 0}
