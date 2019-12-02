@@ -155,7 +155,7 @@ public class Board : MonoBehaviour
     }
     IEnumerator Collapse(int i, int j)
     {
-        tiles[i, j].GetComponent<SpriteRenderer>().color = Color.gray;
+        tiles[i, j].GetComponent<SpriteRenderer>().color = Color.white;
         yield return new WaitForSeconds(0.50f);
         Destroy(tiles[i, j].gameObject);
         tiles[i, j] = null;
@@ -170,19 +170,20 @@ public class Board : MonoBehaviour
             {
                 for (int j = 0; j < mHeight; j++)
                 {
-                    if (tiles[i, mHeight - 1] == null)
-                        tiles[i, mHeight - 1] = InstantiateTile(i, mHeight - 1);
-
                     if (tiles[i, j] == null)
                     {
                         if (j != (mHeight-1) && tiles[i, j+1] != null)
                         {
                             tiles[i, j] = tiles[i, j+1];
                             tiles[i, j+1] = null;
+                            //TransformTile(i, j);
                             tiles[i, j].transform.position = new Vector2(i, j);
-                            //StartCoroutine(TransformTile(i, j));
+                            //StartCoroutine(DoesNotWorkTransformTile(i, j));
                         }
                     }
+
+                    if (tiles[i, mHeight - 1] == null)
+                        tiles[i, mHeight - 1] = InstantiateTile(i, mHeight - 1);
                 }
             }
         }
@@ -191,21 +192,36 @@ public class Board : MonoBehaviour
         MatchDetection();
     }
 
-    // doesnt work
-    IEnumerator TransformTile(int i, int j)
+    void TransformTile(int i, int j)
     {
         Vector2 currentPos = tiles[i, j].transform.position;
         Vector2 targetPos = new Vector2(i, j);
-        while((tiles[i,j].transform.position.y - j) > 0.01f)
+        while (Vector2.Distance(tiles[i, j].transform.position, targetPos) > 0.01f)
         {
+            tiles[i, j].transform.Translate(new Vector2(0f,-0.05f) * Time.deltaTime);
+            if (Vector2.Distance(tiles[i, j].transform.position, targetPos) <= 0.01f)
+            {
+                tiles[i, j].transform.position = new Vector2(i, j);
+                return;
+            }
+        }
+    }
+
+    // doesnt work
+    IEnumerator DoesNotWorkTransformTile(int i, int j)
+    {
+        Vector2 currentPos = tiles[i, j].transform.position;
+        Vector2 targetPos = new Vector2(i, j);
+        while(Vector2.Distance(tiles[i, j].transform.position, targetPos) > 0.01f)
+        {
+            tiles[i, j].transform.position = Vector2.Lerp(currentPos, targetPos, 0.333f);
             yield return new WaitForSeconds(0.3f);
-            tiles[i, j].transform.position = Vector2.Lerp(currentPos, targetPos, (Vector2.Distance(targetPos, currentPos)/10) * Time.deltaTime);
-            Debug.Log(tiles[i, j].transform.position.y);
-            //if ((tiles[i, j].transform.position.y - j) <= 0.01f)
-            //{
-            //    tiles[i, j].transform.position = new Vector2(i, j);
-            //    //StopCoroutine(TransformTile(i, j));
-            //}
+            //Debug.Log(tiles[i, j].transform.position.y);
+            if (Vector2.Distance(tiles[i, j].transform.position, targetPos) <= 0.01f)
+            {
+                tiles[i, j].transform.position = new Vector2(i, j);
+                StopCoroutine(DoesNotWorkTransformTile(i, j));
+            }
         }
     }
 
