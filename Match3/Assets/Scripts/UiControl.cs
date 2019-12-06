@@ -1,18 +1,36 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class UiControll : MonoBehaviour
+public class UIControl : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public Board board;
+
+    public Text score;
+
+    public Text victory;
+
+    private void Start()
     {
-        
+        victory.gameObject.SetActive(false);
+        Time.timeScale = 1;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        score.text = board.GetScore().ToString();
+
+        if(board.GetScore() >= 20000)
+        {
+            Time.timeScale = 0;
+            victory.gameObject.SetActive(true);
+        }
+    }
+
+
+    public void RestartScene()
+    {
+        Application.LoadLevel(Application.loadedLevel);
     }
 }
