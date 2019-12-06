@@ -713,6 +713,51 @@ PrefabInstance:
       propertyPath: m_Name
       value: Board
       objectReference: {fileID: 0}
+    - target: {fileID: 7783849255138401829, guid: c27bcb77e2863074c8f84122315e82f9,
+        type: 3}
+      propertyPath: tilePrefabs.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7783849255138401829, guid: c27bcb77e2863074c8f84122315e82f9,
+        type: 3}
+      propertyPath: mHeight
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7783849255138401829, guid: c27bcb77e2863074c8f84122315e82f9,
+        type: 3}
+      propertyPath: tilePrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 6151966742256438454, guid: 2b96285a3d342f2438b5f86476925a57,
+        type: 3}
+    - target: {fileID: 7783849255138401829, guid: c27bcb77e2863074c8f84122315e82f9,
+        type: 3}
+      propertyPath: tilePrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 4887412586131219849, guid: 8c98952f886727e4a9da44503a3945a2,
+        type: 3}
+    - target: {fileID: 7783849255138401829, guid: c27bcb77e2863074c8f84122315e82f9,
+        type: 3}
+      propertyPath: tilePrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 3887807610285246166, guid: ec3a94d58203997429217741ab948f40,
+        type: 3}
+    - target: {fileID: 7783849255138401829, guid: c27bcb77e2863074c8f84122315e82f9,
+        type: 3}
+      propertyPath: tilePrefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 7377201407512991530, guid: 95d05f6488ff0444ba096aeec5846441,
+        type: 3}
+    - target: {fileID: 7783849255138401829, guid: c27bcb77e2863074c8f84122315e82f9,
+        type: 3}
+      propertyPath: tilePrefabs.Array.data[4]
+      value: 
+      objectReference: {fileID: 6406401403503393225, guid: aaf59afe8dbdc4c4baab691354e32c60,
+        type: 3}
+    - target: {fileID: 7783849255138401829, guid: c27bcb77e2863074c8f84122315e82f9,
+        type: 3}
+      propertyPath: uiControl
+      value: 
+      objectReference: {fileID: 1595351180}
     - target: {fileID: 7783849255138401830, guid: c27bcb77e2863074c8f84122315e82f9,
         type: 3}
       propertyPath: m_LocalPosition.x

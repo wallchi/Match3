@@ -19,15 +19,19 @@ public class UIControl : MonoBehaviour
 
     private void Update()
     {
-        score.text = board.GetScore().ToString();
 
-        if(board.GetScore() >= 20000)
+    }
+
+    public void UpdateScore(int newScore)
+    {
+        score.text = newScore.ToString();
+
+        if (board.GetScore() >= 20000)
         {
             Time.timeScale = 0;
             victory.gameObject.SetActive(true);
         }
     }
-
 
     public void RestartScene()
     {

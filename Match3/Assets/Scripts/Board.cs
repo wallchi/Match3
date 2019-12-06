@@ -7,19 +7,17 @@ public class Board : MonoBehaviour
     public int mWidth;
     public int mHeight;
 
+    public UIControl uiControl;
     private Tile[,] tiles;
 
-    public GameObject circlePrefab;
-    public GameObject diamondPrefab;
-    public GameObject squarePrefab;
-    public GameObject starPrefab;
-    public GameObject trianglePrefab;
+    public GameObject[] tilePrefabs;
 
     bool isBoardFilled;
 
     int score;
     public int GetScore() { return score; }
 
+    public bool isBoardMatching;
     void Start()
     {
         tiles = new Tile[mWidth, mHeight];
@@ -48,43 +46,15 @@ public class Board : MonoBehaviour
 
     Tile InstantiateTile(Vector2 position)
     {
-        int num = Random.Range(1, 6);
-        switch (num)
-        {
-            case 1:
-                return Instantiate(circlePrefab, position, Quaternion.identity).GetComponent<Tile>();
-            case 2:
-                return Instantiate(diamondPrefab, position, Quaternion.identity).GetComponent<Tile>();
-            case 3:
-                return Instantiate(squarePrefab, position, Quaternion.identity).GetComponent<Tile>();
-            case 4:
-                return Instantiate(starPrefab, position, Quaternion.identity).GetComponent<Tile>();
-            case 5:
-                return Instantiate(trianglePrefab, position, Quaternion.identity).GetComponent<Tile>();
-            default:
-                return null;
-        }
+        int num = Random.Range(0, 5);
+        return Instantiate(tilePrefabs[num], position, Quaternion.identity).GetComponent<Tile>();
     }
 
     Tile InstantiateTile(int i ,int j)
     {
-        int num = Random.Range(1, 6);
+        int num = Random.Range(0, 5);
         Vector2 position = new Vector2(i, j);
-        switch (num)
-        {
-            case 1:
-                return Instantiate(circlePrefab, position, Quaternion.identity).GetComponent<Tile>();
-            case 2:
-                return Instantiate(diamondPrefab, position, Quaternion.identity).GetComponent<Tile>();
-            case 3:
-                return Instantiate(squarePrefab, position, Quaternion.identity).GetComponent<Tile>();
-            case 4:
-                return Instantiate(starPrefab, position, Quaternion.identity).GetComponent<Tile>();
-            case 5:
-                return Instantiate(trianglePrefab, position, Quaternion.identity).GetComponent<Tile>();
-            default:
-                return null;
-        }
+        return Instantiate(tilePrefabs[num], position, Quaternion.identity).GetComponent<Tile>();
     }
 
     public void TileSwapOnBoard(Tile selected1, Tile selected2)
@@ -100,6 +70,7 @@ public class Board : MonoBehaviour
 
     private void MatchDetection()
     {
+        isBoardMatching = true;
         TileType temp;
         for (int i = 0; i < mWidth; i++)
         {
@@ -148,14 +119,16 @@ public class Board : MonoBehaviour
                 {
                     StartCoroutine(Collapse(i, j));
                     score += 100;
+                    uiControl.UpdateScore(score);
                 }
             }
         }
+        isBoardMatching = false;
     }
     IEnumerator Collapse(int i, int j)
     {
         tiles[i, j].GetComponent<SpriteRenderer>().color = Color.gray;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.05f);
         Destroy(tiles[i, j].gameObject);
         tiles[i, j] = null;
         isBoardFilled = false;
@@ -163,6 +136,7 @@ public class Board : MonoBehaviour
 
     private void RefillBoard()
     {
+        isBoardMatching = true;
         while (!IsBoardFilled())
         {
             for (int i = 0; i < mWidth; i++)
@@ -207,7 +181,7 @@ public class Board : MonoBehaviour
                 tiles[i, j].transform.position = new Vector2(i, j);
                 break;
             }
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.01f);
         }
     }
 

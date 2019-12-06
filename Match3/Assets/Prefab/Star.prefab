@@ -90,9 +90,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7377201407512991530}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be3491e16e08e824c8f8abb6e1474668, type: 3}
+  m_Script: {fileID: 11500000, guid: ba50e56851d04af4687636800492cf96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileType: 3
   isMatched: 0
 --- !u!61 &-4954402677229653447
 BoxCollider2D:

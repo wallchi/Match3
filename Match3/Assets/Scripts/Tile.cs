@@ -4,16 +4,15 @@ using UnityEngine;
 
 public enum TileType
 {
-    none,
     circle,
     diamond,
     square,
     star,
     triangle
 }
-public abstract class Tile : MonoBehaviour
+public class Tile : MonoBehaviour
 {
-    protected TileType tileType;
+    public TileType tileType;
     public bool isMatched;
     public TileType GetTileType() { return tileType; }
 }

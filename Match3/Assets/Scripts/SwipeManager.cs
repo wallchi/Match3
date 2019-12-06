@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class SwipeManager : MonoBehaviour
 {
-    [SerializeField]
+    
     private Tile selected1;
-    [SerializeField]
+    
     private Tile selected2;
 
     private Board board;
@@ -24,12 +24,12 @@ public class SwipeManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !isLerping & !isLerpingBack)
+        if (Input.GetMouseButtonDown(0) && !isLerping & !isLerpingBack & !board.isBoardMatching)
         {
             selected1 = TileCheck();
         }
 
-        if (Input.GetMouseButtonUp(0) && !isLerping & !isLerpingBack)
+        if (Input.GetMouseButtonUp(0) && !isLerping & !isLerpingBack & !board.isBoardMatching)
         {
             if (selected1)
             {
