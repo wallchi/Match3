@@ -198,11 +198,11 @@ public class Board : MonoBehaviour
         Vector2 currentPos = tiles[i, j].transform.position;
         Vector2 targetPos = new Vector2(i, j);
         float fraction = 0.000f;
-        while(((tiles[i, j].transform.position.y - j) > 0.01f) && (tiles[i, j] != null))
+        while((tiles[i, j] != null) && ((tiles[i, j].transform.position.y - j) > 0.01f) )
         {
             fraction += 0.1f;
             tiles[i, j].transform.position = Vector2.Lerp(tiles[i, j].transform.position, targetPos, 0.5f);
-            if ((Vector2.Distance(tiles[i, j].transform.position, targetPos) <= 0.01f) && (tiles[i, j] != null))
+            if ((tiles[i, j] != null) && (Vector2.Distance(tiles[i, j].transform.position, targetPos) <= 0.01f))
             {
                 tiles[i, j].transform.position = new Vector2(i, j);
                 break;
