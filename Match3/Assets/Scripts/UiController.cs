@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIControl : MonoBehaviour
+public class UiController : MonoBehaviour
 {
     public Board board;
 
@@ -15,11 +15,6 @@ public class UIControl : MonoBehaviour
     {
         victory.gameObject.SetActive(false);
         Time.timeScale = 1;
-    }
-
-    private void Update()
-    {
-
     }
 
     public void UpdateScore(int newScore)

@@ -7,7 +7,7 @@ public class Board : MonoBehaviour
     public int mWidth;
     public int mHeight;
 
-    public UIControl uiControl;
+    public UiController uiControl;
     private Tile[,] tiles;
 
     public GameObject[] tilePrefabs;
